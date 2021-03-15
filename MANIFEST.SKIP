@@ -1,0 +1,16 @@
+.git
+^.gitignore$
+
+^blib
+^Makefile(\.old)?$
+^MANIFEST\.
+^MYMETA\.
+^pm_to_blib$
+
+~$
+\.bak$
+\.old$
+\.orig$
+\.swp
+
+^BigIP-REST.*
