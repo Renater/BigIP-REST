@@ -17,4 +17,14 @@ WriteMakefile(
         'Test::Exception' => 0,
         'Test::More'      => 0,
     },
+    META_MERGE => {
+        'meta-spec' => { version => 2 },
+        'resources' => {
+            repository => {
+                type => 'git',
+                url  => 'git://github.com/Renater/BigIP-REST.git',
+                web  => 'https://github.com/Renater/BigIP-REST'
+            },
+        }
+    }
 );
