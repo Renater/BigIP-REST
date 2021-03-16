@@ -1,25 +1,22 @@
-BigIP::REST
-===========
+# BigIP::REST
 
-DESCRIPTION
------------
+## DESCRIPTION
 
 This module provides a Perl interface for communication with BigIP load-balancer
 using REST interface.
 
-NSTALLATION
-------------
+## INSTALLATION
 
 To install this module:
 
-tar xvzf BigIP-REST-X.Y.tar.gz
-cd BigIP-REST-X.Y
-perl Makefile.PL
-make
-make test
-make install
+  $> tar xvzf BigIP-REST-X.Y.tar.gz
+  $> cd BigIP-REST-X.Y
+  $> perl Makefile.PL
+  $> make
+  $> make test
+  $> make install
 
-AUTHORS
--------
+## AUTHORS
+
 Guillaume Rousse <guillaume.rousse@renater.fr>
 
