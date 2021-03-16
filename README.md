@@ -9,12 +9,12 @@ using REST interface.
 
 To install this module:
 
-  $> tar xvzf BigIP-REST-X.Y.tar.gz
-  $> cd BigIP-REST-X.Y
-  $> perl Makefile.PL
-  $> make
-  $> make test
-  $> make install
+    $> tar xvzf BigIP-REST-X.Y.tar.gz
+    $> cd BigIP-REST-X.Y
+    $> perl Makefile.PL
+    $> make
+    $> make test
+    $> make install
 
 ## AUTHORS
 
