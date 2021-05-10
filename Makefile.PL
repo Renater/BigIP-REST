@@ -1,9 +1,9 @@
 use ExtUtils::MakeMaker;
 
 WriteMakefile(
-    NAME           => 'BigIP::REST',
-    VERSION_FROM   => 'lib/BigIP/REST.pm',
-    ABSTRACT_FROM  => 'lib/BigIP/REST.pm',
+    NAME           => 'Net::BigIP',
+    VERSION_FROM   => 'lib/Net/BigIP.pm',
+    ABSTRACT_FROM  => 'lib/Net/BigIP.pm',
     LICENSE        => 'artistic_2',
     PREREQ_PM => {
         'JSON'           => 0,

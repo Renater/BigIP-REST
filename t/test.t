@@ -4,7 +4,7 @@ use strict;
 use warnings;
 
 use English qw(-no_match_vars);
-use BigIP::REST;
+use Net::BigIP;
 use IO::Socket::SSL;
 
 use Test::More;
@@ -21,7 +21,7 @@ plan tests => 24;
 
 my $bigip;
 lives_ok {
-    $bigip = BigIP::REST->new(
+    $bigip = Net::BigIP->new(
         url => $ENV{BIGIP_TEST_URL},
         ssl_opts => {
             verify_hostname => 0,
@@ -30,7 +30,7 @@ lives_ok {
     );
 } 'connection succeeds';
 
-isa_ok($bigip, 'BigIP::REST');
+isa_ok($bigip, 'Net::BigIP');
 
 lives_ok {
     $bigip->create_session(

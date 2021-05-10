@@ -1,4 +1,4 @@
-package BigIP::REST;
+package Net::BigIP;
 
 use warnings;
 use strict;
@@ -184,7 +184,7 @@ __END__
 
 =head1 NAME
 
-BigIP::REST - REST interface for BigIP
+Net::BigIP - REST interface for BigIP
 
 =head1 DESCRIPTION
 
@@ -193,9 +193,9 @@ using REST interface.
 
 =head1 SYNOPSIS
 
-    use BigIP::REST;
+    use Net::BigIP;
 
-    my $bigip = BigIP::REST->new(
+    my $bigip = Net::BigIP->new(
         url => 'https://my.bigip.tld'
     ):
     $bigip->create_session(
@@ -206,9 +206,9 @@ using REST interface.
 
 =head1 CLASS METHODS
 
-=head2 BigIP::REST->new(url => $url, [ssl_opts => $opts, timeout => $timeout])
+=head2 Net::BigIP->new(url => $url, [ssl_opts => $opts, timeout => $timeout])
 
-Creates a new L<BigIP::REST> instance.
+Creates a new L<Net::BigIP> instance.
 
 =head1 INSTANCE METHODS
 
