@@ -7,7 +7,7 @@ use Carp;
 use LWP::UserAgent;
 use JSON;
 
-our $VERSION = '0.1';
+our $VERSION = '0.2';
 
 sub new {
     my ($class, %params) = @_;
