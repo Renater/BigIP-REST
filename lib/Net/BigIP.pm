@@ -113,6 +113,58 @@ sub get_virtual_servers {
     return $result;
 }
 
+sub get_virtual_server_policies {
+    my ($self, %params) = @_;
+
+    croak "missing virtual_server parameter" unless $params{virtual_server};
+
+    my @parameters;
+    if ($params{partition}) {
+        push @parameters, '$filter=partition%20eq%20' . $params{partition};
+    }
+    if ($params{properties}) {
+        push @parameters, '$select=' . $params{properties};
+    }
+    if ($params{expandSubcollections}) {
+        push @parameters, 'expandSubcollections=' . $params{expandSubcollections};
+    }
+
+    my $url = "/mgmt/tm/ltm/virtual/$params{virtual_server}/policies";
+    if (@parameters) {
+        $url .= '/?' . join('&', @parameters);
+    }
+
+    my $result = $self->_get($url);
+
+    return $result;
+}
+
+sub get_policy_rules {
+    my ($self, %params) = @_;
+
+    croak "missing policy parameter" unless $params{policy};
+
+    my @parameters;
+    if ($params{partition}) {
+        push @parameters, '$filter=partition%20eq%20' . $params{partition};
+    }
+    if ($params{properties}) {
+        push @parameters, '$select=' . $params{properties};
+    }
+    if ($params{expandSubcollections}) {
+        push @parameters, 'expandSubcollections=' . $params{expandSubcollections};
+    }
+
+    my $url = "/mgmt/tm/ltm/policy/$params{policy}/rules";
+    if (@parameters) {
+        $url .= '/?' . join('&', @parameters);
+    }
+
+    my $result = $self->_get($url);
+
+    return $result;
+}
+
 sub get_pools {
     my ($self, %params) = @_;
 
@@ -125,6 +177,115 @@ sub get_pools {
     }
 
     my $url = "/mgmt/tm/ltm/pool";
+    if (@parameters) {
+        $url .= '/?' . join('&', @parameters);
+    }
+
+    my $result = $self->_get($url);
+
+    return $result;
+}
+
+sub get_pool_members {
+    my ($self, %params) = @_;
+
+    croak "missing pool parameter" unless $params{pool};
+
+    my @parameters;
+    if ($params{partition}) {
+        push @parameters, '$filter=partition%20eq%20' . $params{partition};
+    }
+    if ($params{properties}) {
+        push @parameters, '$select=' . $params{properties};
+    }
+
+    my $url = "/mgmt/tm/ltm/pool/$params{pool}/members";
+    if (@parameters) {
+        $url .= '/?' . join('&', @parameters);
+    }
+
+    my $result = $self->_get($url);
+
+    return $result;
+}
+
+sub get_pool_member_stats {
+    my ($self, %params) = @_;
+
+    croak "missing pool parameter" unless $params{pool};
+
+    my @parameters;
+    if ($params{partition}) {
+        push @parameters, '$filter=partition%20eq%20' . $params{partition};
+    }
+    if ($params{properties}) {
+        push @parameters, '$select=' . $params{properties};
+    }
+
+    my $url = "/mgmt/tm/ltm/pool/$params{pool}/members/stats";
+    if (@parameters) {
+        $url .= '/?' . join('&', @parameters);
+    }
+
+    my $result = $self->_get($url);
+
+    return $result;
+}
+
+sub get_pool_stats {
+    my ($self, %params) = @_;
+
+    my @parameters;
+    if ($params{partition}) {
+        push @parameters, '$filter=partition%20eq%20' . $params{partition};
+    }
+    if ($params{properties}) {
+        push @parameters, '$select=' . $params{properties};
+    }
+
+    my $url = "/mgmt/tm/ltm/pool/stats";
+    if (@parameters) {
+        $url .= '/?' . join('&', @parameters);
+    }
+
+    my $result = $self->_get($url);
+
+    return $result;
+}
+
+sub get_nodes {
+    my ($self, %params) = @_;
+
+    my @parameters;
+    if ($params{partition}) {
+        push @parameters, '$filter=partition%20eq%20' . $params{partition};
+    }
+    if ($params{properties}) {
+        push @parameters, '$select=' . $params{properties};
+    }
+
+    my $url = "/mgmt/tm/ltm/node";
+    if (@parameters) {
+        $url .= '/?' . join('&', @parameters);
+    }
+
+    my $result = $self->_get($url);
+
+    return $result;
+}
+
+sub get_node_stats {
+    my ($self, %params) = @_;
+
+    my @parameters;
+    if ($params{partition}) {
+        push @parameters, '$filter=partition%20eq%20' . $params{partition};
+    }
+    if ($params{properties}) {
+        push @parameters, '$select=' . $params{properties};
+    }
+
+    my $url = "/mgmt/tm/ltm/node/stats";
     if (@parameters) {
         $url .= '/?' . join('&', @parameters);
     }
@@ -273,6 +434,156 @@ Filter objects properties to the given ones, as a comma-separated list.
 =head2 $bigip->get_pools([ partition => $partition, properties => $properties ])
 
 Return the list of pools.
+
+Available parameters:
+
+=over
+
+=item partition => $partition
+
+Filter objects list to given partition.
+
+=item properties => $properties
+
+Filter objects properties to the given ones, as a comma-separated list.
+
+=back
+
+=head2 $bigip->get_nodes(%parameters)
+
+Return the list of nodes.
+
+Available parameters:
+
+=over
+
+=item partition => $partition
+
+Filter objects list to given partition.
+
+=item properties => $properties
+
+Filter objects properties to the given ones, as a comma-separated list.
+
+=back
+
+=head2 $bigip->get_node_stats(%parameters)
+
+Return statistics for the nodes.
+
+Available parameters:
+
+=over
+
+=item partition => $partition
+
+Filter objects list to given partition.
+
+=item properties => $properties
+
+Filter objects properties to the given ones, as a comma-separated list.
+
+=back
+
+=head2 $bigip->get_policy_rules(%parameters)
+
+Return the list of rules for the given policy.
+
+Available parameters:
+
+=over
+
+=item policy => $policy
+
+The policy (mandatory).
+
+=item partition => $partition
+
+Filter objects list to given partition.
+
+=item properties => $properties
+
+Filter objects properties to the given ones, as a comma-separated list.
+
+=item expand_subcollection => $boolean
+
+Wether to expand subcollections or not.
+
+=back
+
+=head2 $bigip->get_virtual_server_policies(%parameters)
+
+Return the list of policies for the given virtual server.
+
+Available parameters:
+
+=over
+
+=item virtual_server => $virtual_server
+
+The virtual server (mandatory).
+
+=item partition => $partition
+
+Filter objects list to given partition.
+
+=item properties => $properties
+
+Filter objects properties to the given ones, as a comma-separated list.
+
+=item expand_subcollection => $boolean
+
+Wether to expand subcollections or not.
+
+=back
+
+=head2 $bigip->get_pool_members(%parameters)
+
+Return the list of members for the given pool.
+
+Available parameters:
+
+=over
+
+=item pool => $pool
+
+The pool (mandatory).
+
+=item partition => $partition
+
+Filter objects list to given partition.
+
+=item properties => $properties
+
+Filter objects properties to the given ones, as a comma-separated list.
+
+=back
+
+=head2 $bigip->get_pool_member_stats(%parameters)
+
+Return statistics for the given pool members:.
+
+Available parameters:
+
+=over
+
+=item pool => $pool
+
+The pool (mandatory).
+
+=item partition => $partition
+
+Filter objects list to given partition.
+
+=item properties => $properties
+
+Filter objects properties to the given ones, as a comma-separated list.
+
+=back
+
+=head2 $bigip->get_pool_stats(%parameters)
+
+Return statistics for the pools.
 
 Available parameters:
 
