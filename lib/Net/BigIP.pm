@@ -28,6 +28,10 @@ sub new {
     };
     bless $self, $class;
 
+    if ($params{token}) {
+        $self->{agent}->default_header('X-F5-Auth-Token' => $params{token});
+    }
+
     return $self;
 }
 
@@ -373,7 +377,7 @@ using REST interface.
 
 =head1 CLASS METHODS
 
-=head2 Net::BigIP->new(url => $url, [ssl_opts => $opts, timeout => $timeout])
+=head2 Net::BigIP->new(url => $url, [ssl_opts => $opts, timeout => $timeout, token => $token])
 
 Creates a new L<Net::BigIP> instance.
 
