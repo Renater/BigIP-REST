@@ -47,6 +47,12 @@ sub create_session {
     $self->{agent}->default_header('X-F5-Auth-Token' => "$result->{token}->{token}");
 }
 
+sub get_token {
+    my ($self) = @_;
+
+    return $self->{agent}->default_header('X-F5-Auth-Token');
+}
+
 sub get_certificates {
     my ($self, %params) = @_;
 
@@ -376,6 +382,10 @@ Creates a new L<Net::BigIP> instance.
 =head2 $bigip->create_session(username => $username, password => $password)
 
 Creates a new session token for the given user.
+
+=head2 $bigip->get_token()
+
+Return the current session token.
 
 =head2 $bigip->get_certificates([ partition => $partition, properties => $properties ])
 
